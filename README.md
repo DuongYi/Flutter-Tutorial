@@ -1,6 +1,6 @@
 # flutter_2nd_app
 
-A new Flutter project.
+Flutter Tutorial Course
 
 ## Getting Started
 
@@ -15,3 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # Flutter-Tutorial
+# VSsYii
