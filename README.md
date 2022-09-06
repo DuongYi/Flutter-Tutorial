@@ -1,4 +1,4 @@
-# flutter_2nd_app
+# flutter_tutorial
 
 Flutter Tutorial Course
 
