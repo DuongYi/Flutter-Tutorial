@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               .headline6,
         ),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
-            .copyWith(secondary: Colors.amber),
+            .copyWith(secondary: Colors.greenAccent),
       ),
       home: MyHomePage(),
     );
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
