@@ -61,9 +61,6 @@ class _NewTransactionState extends State<NewTransaction> {
               decoration: const InputDecoration(labelText: 'Title'),
               controller: _titleController,
               onSubmitted: (_) => _sumbitData(),
-              // onChanged: (val) {
-              //   titleInput = val;
-              // },
             ),
             TextField(
               decoration: const InputDecoration(labelText: 'Amount'),
@@ -76,15 +73,16 @@ class _NewTransactionState extends State<NewTransaction> {
               height: 70,
               child: Row(
                 children: <Widget>[
-                  // ignore: unnecessary_null_comparison
                   Text(
                       _selectedDate == null
                           ? 'No Date Chosen!'
                           : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w400)),
-                  FlatButton(
-                    textColor: Theme.of(context).colorScheme.primary,
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.blue,
+                    ),
                     onPressed: _presentDatePicker,
                     child: const Text(
                       'Choose Date',

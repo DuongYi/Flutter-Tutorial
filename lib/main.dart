@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 import './widgets/new_transaction.dart';
@@ -8,7 +6,15 @@ import './widgets/chart.dart';
 
 import './models/transaction.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  // Allow landscape orientation
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,18 +24,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-              subtitle1: TextStyle(
+              subtitle1: const TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
-              button: TextStyle(color: Colors.white),
+              button: const TextStyle(color: Colors.white),
             ),
         appBarTheme: AppBarTheme(
           toolbarTextStyle: ThemeData.light()
               .textTheme
               .copyWith(
-                headline6: TextStyle(
+                headline6: const TextStyle(
                   fontFamily: 'OpenSans',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -39,7 +45,7 @@ class MyApp extends StatelessWidget {
           titleTextStyle: ThemeData.light()
               .textTheme
               .copyWith(
-                headline6: TextStyle(
+                headline6: const TextStyle(
                   fontFamily: 'OpenSans',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -60,6 +66,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+bool _showChart = false;
+
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [];
 
@@ -67,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
         DateTime.now().subtract(
-          Duration(days: 7),
+          const Duration(days: 7),
         ),
       );
     }).toList();
@@ -109,12 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
-      title: Text(
+      title: const Text(
         'Personal Expenses',
       ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           onPressed: () => _startAddNewTransaction(context),
         ),
       ],
@@ -126,26 +134,43 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
-              height: (MediaQuery.of(context).size.height -
-                      appBar.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
-                  0.3,
-              child: Chart(_recentTransactions),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Show Chart'),
+                Switch.adaptive(
+                  activeColor: Theme.of(context).colorScheme.secondary,
+                  value: _showChart,
+                  onChanged: (val) {
+                    setState(() {
+                      _showChart = val;
+                    });
+                  },
+                ),
+              ],
             ),
-            SizedBox(
-              height: (MediaQuery.of(context).size.height -
-                      appBar.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
-                  0.7,
-              child: TransactionList(_userTransactions, _deleteTransaction),
-            ),
+            _showChart
+                ? SizedBox(
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.7,
+                    child: Chart(_recentTransactions),
+                  )
+                : SizedBox(
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.7,
+                    child:
+                        TransactionList(_userTransactions, _deleteTransaction),
+                  ),
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
       ),
     );
