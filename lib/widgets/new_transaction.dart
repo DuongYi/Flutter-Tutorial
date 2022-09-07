@@ -67,11 +67,19 @@ class _NewTransactionState extends State<NewTransaction> {
                 ],
               ),
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: sumbitData,
-              color: Colors.purple,
-              textColor: Theme.of(context).textTheme.button?.color,
-              elevation: 5,
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(
+                  Theme.of(context).textTheme.button?.color,
+                ),
+                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
               child: const Text('Add Transaction'),
             )
           ],
