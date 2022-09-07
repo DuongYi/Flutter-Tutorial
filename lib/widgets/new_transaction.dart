@@ -51,9 +51,27 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => sumbitData(),
               // onChanged: (value) => amountInput = value,
             ),
-            FlatButton(
+            SizedBox(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  const Text('No Date Chosen'),
+                  FlatButton(
+                    textColor: Theme.of(context).colorScheme.primary,
+                    child: const Text(
+                      'Choose Date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () => {},
+                  ),
+                ],
+              ),
+            ),
+            RaisedButton(
               onPressed: sumbitData,
-              textColor: Colors.purple,
+              color: Colors.purple,
+              textColor: Theme.of(context).textTheme.button?.color,
+              elevation: 5,
               child: const Text('Add Transaction'),
             )
           ],
