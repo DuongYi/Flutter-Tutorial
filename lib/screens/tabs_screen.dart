@@ -4,12 +4,12 @@ import 'categories_screen.dart';
 import 'favorites_screen.dart';
 import '../widgets/main_drawer.dart';
 
-class TabScreen extends StatefulWidget {
+class TabsScreen extends StatefulWidget {
   @override
-  State<TabScreen> createState() => _TabScreenState();
+  State<TabsScreen> createState() => _TabScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _TabScreenState extends State<TabsScreen> {
   final List<Map<String, Object>> _pages = [
     {
       'page': CategoriesScreen(),
