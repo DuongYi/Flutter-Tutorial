@@ -18,22 +18,25 @@ class ProductItem extends StatefulWidget {
 class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
-    return GridTile(
-      footer: GridTileBar(
-        backgroundColor: Colors.black54,
-        leading: IconButton(
-          icon: const Icon(Icons.favorite),
-          color: Colors.red,
-          onPressed: () {},
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: GridTile(
+        footer: GridTileBar(
+          backgroundColor: Colors.black87,
+          leading: IconButton(
+            icon: const Icon(Icons.favorite),
+            color: Theme.of(context).colorScheme.secondary,
+            onPressed: () {},
+          ),
+          title: Text(widget.title),
+          trailing: IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            color: Theme.of(context).colorScheme.secondary,
+            onPressed: () {},
+          ),
         ),
-        title: Text(widget.title),
-        trailing: IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          color: Colors.red,
-          onPressed: () {},
-        ),
+        child: Image.network(widget.imageUrl, fit: BoxFit.cover),
       ),
-      child: Image.network(widget.imageUrl, fit: BoxFit.cover),
     );
   }
 }
