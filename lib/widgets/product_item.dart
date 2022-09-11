@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/product_detail_screen.dart';
+
 class ProductItem extends StatefulWidget {
   final String id;
   final String title;
@@ -35,7 +37,15 @@ class _ProductItemState extends State<ProductItem> {
             onPressed: () {},
           ),
         ),
-        child: Image.network(widget.imageUrl, fit: BoxFit.cover),
+        child: GestureDetector(
+          child: Image.network(widget.imageUrl, fit: BoxFit.cover),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ProductDetailScreen.routeName,
+              arguments: widget.id,
+            );
+          },
+        ),
       ),
     );
   }
