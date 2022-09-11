@@ -1,7 +1,7 @@
 # flutter_tutorial
 ## 3. Shop APP
 
-Flutter Tutorial Course
+Flutter Tutorial Courses
 
 ## Getting Started
 
