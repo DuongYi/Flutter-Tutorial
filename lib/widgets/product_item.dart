@@ -23,20 +23,19 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: Consumer<Product>(
-            builder: (ctx, product, child) => IconButton(
-              onPressed: () {
-                product.toggleFavoriteStatus();
-              },
+            builder: (ctx, product, _) => IconButton(
               icon: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border,
               ),
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
               color: Theme.of(context).colorScheme.secondary,
             ),
           ),
@@ -45,8 +44,8 @@ class _ProductItemState extends State<ProductItem> {
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
-            onPressed: () {},
             icon: const Icon(Icons.shopping_cart),
+            onPressed: () {},
             color: Theme.of(context).colorScheme.secondary,
           ),
         ),
