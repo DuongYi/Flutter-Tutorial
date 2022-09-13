@@ -6,6 +6,7 @@ import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
+import './screens/cart_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,10 +28,16 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Lato',
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
               .copyWith(secondary: Colors.deepOrange),
+          primaryTextTheme: const TextTheme(
+            headline6: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         home: ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
         },
       ),
     );
