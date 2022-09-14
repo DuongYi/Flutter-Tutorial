@@ -62,6 +62,10 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
+  Product findById(String id) {
+    return _items.firstWhere((prod) => prod.id == id);
+  }
+
   void addProduct(Product product) {
     final newProduct = Product(
       title: product.title,
@@ -86,7 +90,8 @@ class Products with ChangeNotifier {
     }
   }
 
-  Product findById(String id) {
-    return _items.firstWhere((prod) => prod.id == id);
+  void deleteProduct(String id) {
+    _items.removeWhere((prod) => prod.id == id);
+    notifyListeners();
   }
 }
