@@ -22,7 +22,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
-  final _isInit = true;
+  var _isInit = true;
   var _isLoading = false;
 
   @override
@@ -46,7 +46,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         });
       });
     }
-
+    _isInit = false;
     super.didChangeDependencies();
   }
 
@@ -94,7 +94,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body: ProductsGrid(_showOnlyFavorites),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductsGrid(_showOnlyFavorites),
     );
   }
 }
