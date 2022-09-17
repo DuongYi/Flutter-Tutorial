@@ -45,15 +45,21 @@ class Products with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodId, prodData) {
-        bool isFavorite = extractedData[prodId]['isFavorite'] != null &&
-                extractedData[prodId]['isFavorite'] == 'true'
-            ? true
-            : false;
+        bool isFavorite =
+            prodData['isFavorite'] != null && prodData['isFavorite'] == 'true'
+                ? true
+                : false;
+
+        var cvPrice = prodData['price'] == null ||
+                prodData['price'].runtimeType == 'String'
+            ? 0.0
+            : double.parse(prodData['price'].toString());
+
         loadedProducts.add(Product(
           id: prodId,
           title: prodData['title'],
           description: prodData['description'],
-          price: double.parse(prodData['price']),
+          price: cvPrice,
           isFavorite: isFavorite,
           imageUrl: prodData['imageUrl'],
         ));
@@ -95,9 +101,18 @@ class Products with ChangeNotifier {
     }
   }
 
-  void updateProduct(String id, Product newProduct) {
+  Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
+      final url = Uri.parse(
+          'https://flutter-shop-app-735cf-default-rtdb.firebaseio.com/products/$id.json');
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+          }));
       _items[prodIndex] = newProduct;
       notifyListeners();
     } else {
