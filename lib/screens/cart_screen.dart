@@ -11,6 +11,8 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Cart'),
@@ -97,15 +99,12 @@ class _OrderButtonState extends State<OrderButton> {
               });
               widget.cart.clear();
             },
-      style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-      ),
       child: _isLoading
           ? const CircularProgressIndicator()
           : const Text(
               'ORDER NOW',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
     );
