@@ -136,18 +136,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
             ],
           ),
         );
-      } finally {
-        setState(() {
-          _isLoading = false;
-        });
-        Navigator.of(context).pop();
       }
     }
     setState(() {
       _isLoading = false;
     });
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
-    // Navigator.of(context).pop();
   }
 
   @override
