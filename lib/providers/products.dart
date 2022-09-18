@@ -11,6 +11,11 @@ class Products with ChangeNotifier {
 
   final _showFavoritesOnly = false;
 
+  final String? authToken;
+  final String? userId;
+
+  Products(this.authToken, this.userId, this._items);
+
   List<Product> get items {
     // if (_showFavoritesOnly) {
     //   return _items.where((prodItem) => prodItem.isFavorite).toList();
@@ -39,7 +44,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     final url = Uri.parse(
-        'https://flutter-shop-app-735cf-default-rtdb.firebaseio.com/products.json');
+        'https://flutter-shop-app-735cf-default-rtdb.firebaseio.com/products.json?auth=$authToken');
 
     try {
       final response = await http.get(url);
