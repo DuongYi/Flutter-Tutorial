@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/http_exception.dart';
+
 import '../constants/index.dart';
 
 class Auth with ChangeNotifier {
@@ -32,7 +34,7 @@ class Auth with ChangeNotifier {
       print(responseData);
 
       if (responseData['error'] != null) {
-        // ...
+        throw HttpException(responseData['error']['message']);
       }
       _token = responseData['idToken'];
       _userId = responseData['localId'];
