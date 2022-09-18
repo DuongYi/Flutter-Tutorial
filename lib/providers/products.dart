@@ -50,11 +50,18 @@ class Products with ChangeNotifier {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
+
+      if (extractedData == null) {
+        return;
+      }
+
+      final favoriteResponse = await http.get(Uri.parse(
+          'https://flutter-shop-app-735cf-default-rtdb.firebaseio.com/userFavorites/$userId.json?auth=$authToken'));
+      final favoriteData = json.decode(favoriteResponse.body);
+
       extractedData.forEach((prodId, prodData) {
         bool isFavorite =
-            prodData['isFavorite'] != null && prodData['isFavorite'] == 'true'
-                ? true
-                : false;
+            favoriteData == null ? false : favoriteData[prodId] ?? false;
 
         var cvPrice = prodData['price'] == null ||
                 prodData['price'].runtimeType == 'String'
